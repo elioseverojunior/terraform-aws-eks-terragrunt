@@ -1,0 +1,3 @@
+inputs = {
+  application = "tools"
+}

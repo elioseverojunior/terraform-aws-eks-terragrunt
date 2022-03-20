@@ -1,0 +1,3 @@
+inputs = {
+  team = "sre"
+}
