@@ -56,23 +56,22 @@ terraform {
 
   before_hook "tfenv" {
     commands = ["init", "plan", "apply", "import", "push", "refresh", "validate", "destroy"]
-    execute  = ["bash", "-c", "${include.root.inputs.tfenv}", local.tfenv_version]
+    execute  = ["bash", "-c", "${include.root.inputs.tfenv} ${local.tfenv_version}"]
   }
 }
 
 inputs = {
-  ecr_name = "jenkins"
-  tags = {
-    "Name"        = "jenkins-ecr-registry"
-    "pd:ansible"  = "false"
-    "pd:deployer" = "elio.severo@passeidireto.com"
-    "pd:iac"      = "terraform"
-    "pd:owner"    = "SRE"
-    "pd:project"  = "jenkins-ecr-registry"
-    "pd:region"   = "us-east-1"
-    "pd:repo"     = "https://github.com/PasseiDireto/terraform-jenkins-iac.git"
-    "pd:stack"    = include.environment.inputs.environment
-    "pd:tier"     = "infra"
-    "pd:vpc_id"   = "vpc-0aa97d8dc6991a18d"
+  cluster_name = include.application.inputs.application
+  default_tags = {
+    "Name"        = include.application.inputs.application
+    "ansible"  = "false"
+    "iac"      = "terraform"
+    "owner"    = "SRE"
+    "project"  = "eks"
+    "region"   = "sa-east-1"
+    "repo"     = "https://github.com/elioseverojunior/terraform-aws-eks-terragrunt.git"
+    "stack"    = include.environment.inputs.environment
+    "tier"     = "infra"
+    "vpc_id"   = "vpc-0aa97d8dc6991a18d"
   }
 }

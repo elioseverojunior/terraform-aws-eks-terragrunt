@@ -139,7 +139,7 @@ spec:
       protocol: HTTP
     hosts:
     - "chip"
-    - "chip.k8s.pd-sandbox.com"
+    - "chip.k8s.nickel.nutrien.digital"
     - "chip.chip.svc.cluster.local"
 ---
 apiVersion: networking.istio.io/v1alpha3
@@ -150,7 +150,7 @@ metadata:
 spec:
   hosts:
   - "chip.chip.svc.cluster.local"
-  - "chip.k8s.pd-sandbox.com"
+  - "chip.k8s.nickel.nutrien.digital"
   - "chip"
   gateways:
   - chip-gateway

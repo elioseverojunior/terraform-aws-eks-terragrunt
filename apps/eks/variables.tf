@@ -1,5 +1,5 @@
 variable "cluster_name" {
-  default = "br-dev01-eks"
+  type = string
 }
 
 variable "aws_region" {
@@ -61,27 +61,15 @@ variable "kiali_virtual_service_host" {
 
 variable "grafana_kiali_virtual_service_host" {
   type    = string
-  default = "grafana.kiali.k8s.nickel.nutrien.digital"
+  default = "grafana.k8s.nickel.nutrien.digital"
 }
 
 variable "default_tags" {
   type = map(any)
-  default = {
-    Application         = "EKS"
-    Cluster             = "SND"
-    DataClassification  = "Excluded"
-    Env_desc            = "SRE AWS EKS CLUSTER"
-    Environment         = "sa-east-1-SND-SRE"
-    Environment_Type    = "SND"
-    Environment_Version = "DEV01"
-    ManagedBy           = "Terraform"
-    Market              = "BR"
-    Name                = "sa-east-1-SND-SRE"
-    Owner               = "elio.severo@passeidireto.com"
-    Purpose             = "DIGITAL"
-    Squad               = "SRE"
-    Team                = "SRE"
-    Tribe               = "SRE"
-    Workload            = "SANDBOX"
-  }
+}
+
+variable "aws_vpc_ipv4_pod_cidr_block" {
+  description = "AWS VPC IPv4 POD CIDR Block"
+  type        = string
+  default     = "172.16.0.0/16"
 }

@@ -1167,3 +1167,6 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudio,visualstudiocode,intellij,intellij+iml,intellij+all,python,terraform,terragrunt,ruby,pycharm,pycharm+iml,pycharm+all,go
+
+# Personal ignores
+**/*/terragrunt-debug.tfvars.json

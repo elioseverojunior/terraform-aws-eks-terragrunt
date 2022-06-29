@@ -6,9 +6,9 @@ remote_state {
 
   config = {
     encrypt = true
-    bucket  = "pd-sre-production"
+    bucket  = "nutrien-terraform-br-prd"
     key     = "${path_relative_to_include()}/terraform.tfstate"
-    region  = "us-east-2"
+    region  = "sa-east-1"
   }
 
   generate = {
@@ -18,17 +18,16 @@ remote_state {
 }
 
 inputs = {
-  tags = {
-    "pd:ansible"  = false
-    "pd:deployer" = "elio.severo@passeidireto.com"
-    "pd:iac"      = "terraform"
-    "pd:owner"    = "SRE"
-    "pd:project"  = "TBD"
-    "pd:region"   = "TBD"
-    "pd:repo"     = "https://github.com/PasseiDireto/terraform-jenkins-iac.git"
-    "pd:stack"    = "TBD"
-    "pd:tier"     = "infra"
-    "pd:vpc_id"   = "TBD"
+  default_tags = {
+    "ansible"  = false
+    "iac"      = "terraform"
+    "owner"    = "SRE"
+    "project"  = "TBD"
+    "region"   = "TBD"
+    "repo"     = "https://github.com/elioseverojunior/terraform-aws-eks-terragrunt.git"
+    "stack"    = "TBD"
+    "tier"     = "infra"
+    "vpc_id"   = "TBD"
   }
   tfenv = "${get_parent_terragrunt_dir()}/scripts/tfenv.sh"
 }

@@ -1,5 +1,4 @@
 resource "aws_eks_node_group" "cluster" {
-
   cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = format("%s-node-group", aws_eks_cluster.eks_cluster.name)
   node_role_arn   = aws_iam_role.eks_nodes_roles.arn
@@ -22,11 +21,11 @@ resource "aws_eks_node_group" "cluster" {
     "ingress/ready" = "true"
   }
 
-  tags = {
-    "kubernetes.io/cluster/${var.cluster_name}"     = "owned",
-    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned",
-    "k8s.io/cluster-autoscaler/enabled"             = true
-  }
+  tags = merge(var.default_tags, {
+    format("kubernetes.io/cluster/%s", var.cluster_name)            = "owned",
+    format("kubernetes.io/cluster-autoscaler/%s", var.cluster_name) = "owned",
+    format("kubernetes.io/cluster-autoscaler/enabled")              = true
+  })
 
   lifecycle {
     ignore_changes = [
@@ -52,12 +51,11 @@ resource "aws_security_group" "cluster_nodes_sg" {
   }
 
   tags = merge(var.default_tags, {
-    Application = "VPC"
-    Name        = upper(format("%s-%s-nodes-sg", var.default_tags["Name"], var.cluster_name))
+    Name = format("%s-nodes-sg", var.cluster_name)
   })
 }
 
-resource "aws_security_group_rule" "nodep0ort" {
+resource "aws_security_group_rule" "nodeport" {
   cidr_blocks = ["0.0.0.0/0"]
   from_port   = 30000
   to_port     = 32768

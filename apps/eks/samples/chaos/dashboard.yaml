@@ -13,7 +13,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "chaos-dashboard.k8s.pd-sandbox.com"
+    - "chaos-dashboard.k8s.nickel.nutrien.digital"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -22,7 +22,7 @@ metadata:
   namespace: chaos-testing
 spec:
   hosts:
-  - "chaos-dashboard.k8s.pd-sandbox.com"
+  - "chaos-dashboard.k8s.nickel.nutrien.digital"
   gateways:
   - chaos-dashboard-gateway
   http:

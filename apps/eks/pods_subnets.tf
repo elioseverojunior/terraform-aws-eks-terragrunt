@@ -5,7 +5,7 @@ resource "aws_subnet" "pods_subnet_1a" {
   availability_zone = format("%sa", var.aws_region)
 
   tags = merge(var.default_tags, {
-    "Name"                                               = format("%s-%s-pods-1a", var.default_tags["Name"], var.cluster_name),
+    "Name"                                               = format("%s-pods-1a", var.cluster_name),
     format("kubernetes.io/cluster/%s", var.cluster_name) = "shared"
   })
 
@@ -21,7 +21,7 @@ resource "aws_subnet" "pods_subnet_1b" {
   availability_zone = format("%sb", var.aws_region)
 
   tags = merge(var.default_tags, {
-    "Name"                                               = format("%s-%s-pods-1b", var.default_tags["Name"], var.cluster_name),
+    "Name"                                               = format("%s-pods-1b", var.cluster_name),
     format("kubernetes.io/cluster/%s", var.cluster_name) = "shared"
   })
 
@@ -37,7 +37,7 @@ resource "aws_subnet" "pods_subnet_1c" {
   availability_zone = format("%sc", var.aws_region)
 
   tags = merge(var.default_tags, {
-    "Name"                                               = format("%s-%s-pods-1c", var.default_tags["Name"], var.cluster_name),
+    "Name"                                               = format("%s-pods-1c", var.cluster_name),
     format("kubernetes.io/cluster/%s", var.cluster_name) = "shared"
   })
 

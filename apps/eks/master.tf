@@ -17,7 +17,6 @@ resource "aws_eks_cluster" "eks_cluster" {
       aws_subnet.private_subnet_1b.id,
       aws_subnet.private_subnet_1c.id
     ]
-
   }
 
   encryption_config {
@@ -31,11 +30,11 @@ resource "aws_eks_cluster" "eks_cluster" {
     "api", "audit", "authenticator", "controllerManager", "scheduler"
   ]
 
-  tags = {
-    "kubernetes.io/cluster/${var.cluster_name}"     = "shared"
-    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned",
-    "k8s.io/cluster-autoscaler/enabled"             = true
-  }
+  tags = merge(var.default_tags, {
+    format("kubernetes.io/cluster/%s", var.cluster_name)            = "shared"
+    format("kubernetes.io/cluster-autoscaler/%s", var.cluster_name) = "owned",
+    format("kubernetes.io/cluster-autoscaler/enabled")              = true
+  })
 
 }
 
@@ -51,9 +50,9 @@ resource "aws_security_group" "cluster_master_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
+  tags = merge(var.default_tags, {
     Name = format("%s-master-sg", var.cluster_name)
-  }
+  })
 
 }
 
